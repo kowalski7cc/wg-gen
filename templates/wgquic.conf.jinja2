@@ -1,0 +1,11 @@
+[Interface]
+PrivateKey = {{privkey}}
+{% if listen_port %}ListenPort = {{listen_port}}{% endif -%}
+Address = {{address}}
+{% for peer in peers %}
+[Peer]
+PublicKey = {{peer.pubkey}}
+AllowedIPs = {{ peer.allowed | join(',') }}
+{% if peer.keepalive %}PersistentKeepalive = {{peer.keepalive}}{% endif -%}
+{% if peer.endpoint %}Endpoint = {{peer.endpoint}}{% endif -%}{{""}}
+{% endfor %}
